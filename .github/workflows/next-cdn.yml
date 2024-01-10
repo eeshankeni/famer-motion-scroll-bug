@@ -1,0 +1,47 @@
+name: Build and deploy website to CDN
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Build and deploy the website
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          cache: "yarn"
+      - name: Install dependencies
+        run: yarn --immutable
+
+      - name: Build the Next app
+        run: yarn build
+
+      - name: Deploy the app 🚀
+        run: yarn deploy.cdn
+        env:
+          STORAGEZONE_BASE_URL: ${{ secrets.STORAGEZONE_BASE_URL }}
+          STORAGEZONE_API_KEY: ${{ secrets.STORAGEZONE_API_KEY }}
+          PULLZONE_BASE_URL: ${{ secrets.PULLZONE_BASE_URL }}
+          ACCOUNT_KEY: ${{ secrets.ACCOUNT_KEY }}
+
+      - name: Ntfy status update
+        if: always()
+        env:
+          STATUS: ${{ job.status == 'success' && 'tada' || 'triangular_flag_on_post' }}
+          # https://stackoverflow.com/a/70566764/13227113
+          ACTION_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          PRIORITY: ${{ job.status == 'failure' && 'high' || 'default' }}
+        run: |
+          curl \
+          -H "title: Velocilabs landing page status update!" \
+          -H "priority: $PRIORITY" \
+          -H "tags: $STATUS,$GITHUB_ACTOR" \
+          -H "click: $ACTION_URL" \
+          -d "Commit SHA: $GITHUB_SHA" \
+          "https://d-ntfy.spyke.social/SIP2XleMGJAPvBZz_spyke_webapp_cicd"
+

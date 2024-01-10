@@ -1,0 +1,53 @@
+{
+  "name": "velocilabs-landing-page",
+  "packageManager": "yarn@4.0.2",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "deploy.cdn": "node deploy.mjs",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@google-cloud/recaptcha-enterprise": "^5.1.0",
+    "@react-hook/window-size": "^3.1.1",
+    "@types/jest": "^29.5.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-request-id": "^3.0.0",
+    "formik": "^2.4.5",
+    "framer-motion": "^10.17.9",
+    "morgan": "^1.10.0",
+    "next": "latest",
+    "patch-package": "^8.0.0",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-google-recaptcha": "^3.1.0",
+    "react-icons": "^4.12.0",
+    "react-toastify": "^9.1.3",
+    "react-type-animation": "^3.2.0",
+    "styled-components": "^6.1.0",
+    "styled-components-breakpoint": "^3.0.0-preview.20",
+    "yup": "^1.3.3"
+  },
+  "devDependencies": {
+    "@types/cors": "^2",
+    "@types/express": "^4",
+    "@types/morgan": "^1",
+    "@types/node": "^20.8.10",
+    "@types/react": "18.0.1",
+    "@types/react-dom": "^18.2.14",
+    "@types/react-google-recaptcha": "^2.1.8",
+    "@types/styled-components": "^5.1.30",
+    "eslint": "^8",
+    "eslint-config-next": "14.0.1",
+    "nodemon": "^3.0.2",
+    "typescript": "^5.2.2"
+  },
+  "resolutions": {
+    "styled-components-breakpoint@^3.0.0-preview.20": "patch:styled-components-breakpoint@npm%3A3.0.0-preview.20#./.yarn/patches/styled-components-breakpoint-npm-3.0.0-preview.20-234c64a72a.patch"
+  }
+}
