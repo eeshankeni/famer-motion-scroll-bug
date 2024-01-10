@@ -22,7 +22,9 @@ export default function HomePage() {
     <>
       <AnimatedPurpleProgressBar as={motion.div} style={{ scaleX }} />
 
-      <Container ref={MainScrollContainerRef} as={motion.div}>
+      {/* in global.css i have prevented the body from being scrolled */}
+
+      <ScrollableContainer ref={MainScrollContainerRef} as={motion.div}>
         <div style={{ height: "1100vh", background: "white", width: "100vw" }}>
           {/* React component containing another component which contains animated div declared outside of homepage.tsx */}
           {/* does not animate in production */}
@@ -31,7 +33,7 @@ export default function HomePage() {
             MainScrollContainerRef={MainScrollContainerRef}
           />
         </div>
-      </Container>
+      </ScrollableContainer>
 
       {/* React component containing animated div declared outside of homepage.tsx */}
       <GreenChildComponentInside
@@ -77,7 +79,7 @@ const RedChildComponent: React.FC<ChildComponentProps> = ({
   return <AnimatedRedProgressBar as={motion.div} style={{ scaleX }} />;
 };
 
-const Container = styled.div`
+const ScrollableContainer = styled.div`
   height: 100%;
   overflow-y: scroll; // This enables scrolling in the y-axis of Container instead of global.css body
 `;
