@@ -1,6 +1,6 @@
 UseScroll has a Container prop which is used to keep track of the scroll of a custom container instead of the default scrollable body.
 Doing so requires a ref to be passed which references the scrollable container. However, if the ref is passed down a component and
-then the ref is further passed along then useScroll seems to fail.
+then the ref is further passed along the component tree then useScroll seems to fail.
 
 https://www.framer.com/motion/use-scroll/
 
